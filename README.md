@@ -57,10 +57,10 @@ A simple way to ensure you get all the correct version of Ansible is to use the 
 You will then need to use [bind mounts](https://docs.docker.com/storage/bind-mounts/) to get the inventory and ssh key into the container, like this:
 
 ```ShellSession
-docker pull quay.io/kubespray/kubespray:v2.18.1
+docker pull quay.io/kubespray/kubespray:v2.19.0
 docker run --rm -it --mount type=bind,source="$(pwd)"/inventory/sample,dst=/inventory \
   --mount type=bind,source="${HOME}"/.ssh/id_rsa,dst=/root/.ssh/id_rsa \
-  quay.io/kubespray/kubespray:v2.18.1 bash
+  quay.io/kubespray/kubespray:v2.19.0 bash
 # Inside the container you may now run the kubespray playbooks:
 ansible-playbook -i /inventory/inventory.ini --private-key /root/.ssh/id_rsa cluster.yml
 ```
@@ -111,6 +111,7 @@ vagrant up
 - [Adding/replacing a node](docs/nodes.md)
 - [Upgrades basics](docs/upgrades.md)
 - [Air-Gap installation](docs/offline-environment.md)
+- [Hardening](docs/hardening.md)
 - [Roadmap](docs/roadmap.md)
 
 ## Supported Linux Distributions
@@ -132,27 +133,27 @@ Note: Upstart/SysV init based OS types are not supported.
 ## Supported Components
 
 - Core
-  - [kubernetes](https://github.com/kubernetes/kubernetes) v1.23.6
+  - [kubernetes](https://github.com/kubernetes/kubernetes) v1.23.7
   - [etcd](https://github.com/etcd-io/etcd) v3.5.3
   - [docker](https://www.docker.com/) v20.10 (see note)
   - [containerd](https://containerd.io/) v1.6.4
   - [cri-o](http://cri-o.io/) v1.22 (experimental: see [CRI-O Note](docs/cri-o.md). Only on fedora, ubuntu and centos based OS)
 - Network Plugin
-  - [cni-plugins](https://github.com/containernetworking/plugins) v1.0.1
-  - [calico](https://github.com/projectcalico/calico) v3.21.4
+  - [cni-plugins](https://github.com/containernetworking/plugins) v1.1.1
+  - [calico](https://github.com/projectcalico/calico) v3.22.3
   - [canal](https://github.com/projectcalico/canal) (given calico/flannel versions)
-  - [cilium](https://github.com/cilium/cilium) v1.11.1
+  - [cilium](https://github.com/cilium/cilium) v1.11.3
   - [flanneld](https://github.com/flannel-io/flannel) v0.17.0
-  - [kube-ovn](https://github.com/alauda/kube-ovn) v1.8.1
-  - [kube-router](https://github.com/cloudnativelabs/kube-router) v1.4.0
+  - [kube-ovn](https://github.com/alauda/kube-ovn) v1.9.2
+  - [kube-router](https://github.com/cloudnativelabs/kube-router) v1.5.0
   - [multus](https://github.com/intel/multus-cni) v3.8
   - [weave](https://github.com/weaveworks/weave) v2.8.1
 - Application
   - [cephfs-provisioner](https://github.com/kubernetes-incubator/external-storage) v2.1.0-k8s1.11
   - [rbd-provisioner](https://github.com/kubernetes-incubator/external-storage) v2.1.1-k8s1.11
-  - [cert-manager](https://github.com/jetstack/cert-manager) v1.6.1
+  - [cert-manager](https://github.com/jetstack/cert-manager) v1.8.0
   - [coredns](https://github.com/coredns/coredns) v1.8.6
-  - [ingress-nginx](https://github.com/kubernetes/ingress-nginx) v1.2.0
+  - [ingress-nginx](https://github.com/kubernetes/ingress-nginx) v1.2.1
 
 ## Container Runtime Notes
 
